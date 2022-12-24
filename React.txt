@@ -1,0 +1,70 @@
+
+● What is Emmet?
+
+EMMET:
+It allows you to type shortcuts that are then expanded into full pieces of code 
+Helps you write HTML and CSS faster by using simple abbreviations that are then converted into code blocks.
+
+https://docs.emmet.io/cheat-sheet/
+
+However, there is one minor drawback; by default, Emmet is not enabled for React in VS Code.
+
+
+● Difference between a Library and Framework?   
+JS libraries give developers predefined methods and classes to help them work faster and more efficiently.
+ On the other hand, the JS framework acts as a framework for developers to construct apps for specific platforms.
+
+The term "inversion of control" describes the technical distinction between a framework and a library. 
+You have complete control over the application's flow when you use a library. You get to decide when and where you want to call the library.
+While when using a framework, the flow is controlled by the framework itself. It gives you various locations to plug in your code, 
+but it only calls the code you've plugged in when it's needed.
+
+● What is CDN? Why do we use it?
+CDN(Content Delivery Network) is a group of servers which work together to provide fast delivery of Internet content.
+A CDN allows for the quick transfer of assets needed for loading Internet content including HTML pages, javascript files, stylesheets, images, and videos.
+We use it for the following benefits
+Improved website loading times
+Reducing banwidth costs
+Increased content availability
+Improving website security
+
+● Why is React known as React?
+React was developed for applications (Facebook) that have constantly changing data. 
+Since React is a front-end framework or the “View” in MVC, this means that as the user clicks around 
+and changes the app’s data, the view should “react” or change with those user events. 
+User events being mouse clicks, typing, submitting a form.
+
+● What is crossorigin in script tag?
+The crossorigin attribute sets the mode of the request to an HTTP CORS Request. Web pages often make requests to load resources on other servers. 
+Here is where CORS comes in. A cross-origin request is a request for a resource (e.g. style sheets, iframes, images, fonts, or scripts) from another domain
+If you serve React from a CDN, we recommend to keep the crossorigin attribute set:
+
+<script crossorigin src="..."></script>
+We also recommend to verify that the CDN you are using sets the Access-Control-Allow-Origin: 
+This enables a better error handling experience in React 16 and later.
+
+● What is diference between React and ReactDOM
+
+
+react is for the components and react-dom is for rendering the components in the DOM. 
+'react-dom' acts as a glue between components and DOM. You will be using render() method of the react-dom to render components in the DOM 
+The react package contains React.createElement, React.createClass and React.Component, React.PropTypes, React.Children,
+ and the other helpers related to elements and component classes. We think of these as the isomorphic or universal helpers that you need to build components.
+
+The react-dom package contains ReactDOM.render, ReactDOM.unmountComponentAtNode, and ReactDOM.findDOMNode, 
+and in react-dom/server we have server-side rendering support with ReactDOMServer.renderToString and ReactDOMServer.renderToStaticMarkup.
+
+● What is difference between react.development.js and react.production.js files via CDN?
+
+Production CDN file of react is just a minified and optimized version that makes rendering of file on end user's browser very quick and performance enhancing.
+Development CDN file is solely for local development purposes
+It will take more time to build compared to production build
+
+● What is async and defer? -
+In async, the html parsing will go on with the script fetching and once that is done it will wait till all scripts executed and then go ahead with the parsing
+In defer the html parsing will go on with script fetching , once it fetched it will be stopped and the parsing will finish first and once thats done will the script start execution
+Async will not guarantee the order of execution of scripts but defer does
+Async is not good with multiple dependent scripts so better to go with defer 
+If we have to load some external scripts like mostly Google analytics better to use async
+
+Defer is always a better alternative to async 
