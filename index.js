@@ -1,9 +1,6 @@
-//  <script>
-//     const heading = document.createElement("h1");
-//     heading.innerHTML = "Hello World in JS";
-//     const root = document.getElementById("root");
-//     root.append(heading);
-//   </script>
+
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 const heading1 = React.createElement(
   "h1",
@@ -17,9 +14,10 @@ const heading2 = React.createElement(
 );
 const container = React.createElement(
   "div",
-  { id: "title", class: "container" },
+  { id: "title",hellow:"test", class: "container" },//we can multiple things here which will behave like props not only id and class 
   [heading1, heading2]
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(container);
+
