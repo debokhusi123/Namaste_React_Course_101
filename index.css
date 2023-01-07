@@ -1,4 +1,4 @@
-*{
+/* *{
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -38,10 +38,74 @@
     border:2px solid rgb(87, 35, 198);
 }
   
-  /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+  /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels 
   @media screen and (max-width: 500px) {
     .navbar a {
       float: none;
       display: block;
     }
+  } */
+  div, p, span{
+    font-size: 1.6rem;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    border: 1px solid black;
+  }
+  
+  .nav-items > ul {
+    list-style-type: none;
+    display: flex;
+  }
+  
+  .nav-items > ul > li {
+    padding: 10px;
+  }
+  
+  .logo {
+    width: 100px;
+  }
+  
+  .card {
+    width: 200px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .card > img {
+    width: 100%;
+}
+
+
+
+  .restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .restaurant-list h2 {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.2;
+    margin-block-end: 0px;
+    font-weight: 500;
+    text-align: left;
+    font-size: 1.7rem;
+    margin: 0.8rem 0px 0.6rem;
+    max-width: 80%;
+    color: rgb(28, 28, 28);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .restaurant-info > h3 {
+    padding: 5px;
+    font-size: x-small;
   }
