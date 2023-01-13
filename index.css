@@ -1,111 +1,139 @@
-/* *{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-}
-.header{
-    background-color:#46a953;
-    height: 70px;
-    padding:25px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-}
-#logo, #icon {
-    cursor:pointer;
-    flex-grow: 1;
-    text-align:center;
-}
-.logo, .icon{
-    width:2rem;
-    height:2rem;
-}
-.icon{
-    color:#fff;
-}
-  #search {
-    flex-grow:2;
-}
-.search {
-    width: 100%;
-    padding: 1rem;
-    outline:none;
-    border:2px solid greenyellow;
-    border-radius:1rem;
-}
-.search:focus{
-    transition:.5s ease-in;
-    border:2px solid rgb(87, 35, 198);
-}
-  
-  /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels 
-  @media screen and (max-width: 500px) {
-    .navbar a {
-      float: none;
-      display: block;
-    }
-  } */
-  div, p, span{
-    font-size: 1.6rem;
-  }
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&display=swap");
 
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px;
-    border: 1px solid black;
-  }
-  
-  .nav-items > ul {
-    list-style-type: none;
-    display: flex;
-  }
-  
-  .nav-items > ul > li {
-    padding: 10px;
-  }
-  
-  .logo {
-    width: 100px;
-  }
-  
-  .card {
-    width: 200px;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 10px;
-  }
-  
-  .card > img {
-    width: 100%;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  border: 1px solid black;
 }
 
+.nav-items > ul {
+  list-style-type: none;
+  display: flex;
+}
 
+.nav-items > ul > li {
+  padding: 10px;
+}
 
-  .restaurant-list {
-    display: flex;
-    flex-wrap: wrap;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .restaurant-list h2 {
-    display: flex;
-    justify-content: space-between;
-    line-height: 1.2;
-    margin-block-end: 0px;
-    font-weight: 500;
-    text-align: left;
-    font-size: 1.7rem;
-    margin: 0.8rem 0px 0.6rem;
-    max-width: 80%;
-    color: rgb(28, 28, 28);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .restaurant-info > h3 {
-    padding: 5px;
-    font-size: x-small;
-  }
+.logo {
+  width: 100px;
+}
+
+.content {
+  background-color: #f4f6f7;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+}
+
+.content > .restaurant-list {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  font-family: "IBM Plex Serif", serif;
+  box-shadow: 0 1px 3px #ccc;
+  min-height: 500px;
+}
+
+.content > .restaurant-list > .card {
+  margin: 1rem;
+  width: 300px;
+  padding: 1rem 1rem 0 1rem;
+  border: 1px solid #fff;
+}
+
+.content > .restaurant-list > .card img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.cuisine {
+  padding: 0.5rem 0;
+}
+
+.card-subdivision {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.anchor {
+  width: 100%;
+  text-align: center;
+  font-family: "Signika Negative", sans-serif;
+}
+.anchor a {
+  padding: 1rem 0;
+  text-decoration: none;
+  color: #38a4eb;
+  display: block;
+}
+.anchor a:hover {
+  color: #22dd70;
+}
+
+.content > .card-.restaurant-list > .card:hover {
+  border-color: #ccc;
+  box-shadow: 0px 1px 3px 1px #e3dede;
+}
+
+.search-container {
+  width: 350px;
+  position: relative;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.search-input {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  padding: 15px 45px 15px 15px;
+  background-color: #eaeaeb;
+  color: #6c6c6c;
+  border-radius: 6px;
+  border: none;
+  transition: all 0.4s;
+}
+
+.search-input:focus {
+  border: none;
+  outline: none;
+  box-shadow: 0 1px 12px #b8c6db;
+  -moz-box-shadow: 0 1px 12px #b8c6db;
+  -webkit-box-shadow: 0 1px 12px #b8c6db;
+}
+
+.search-btn {
+  background-color: transparent;
+  font-size: 18px;
+  padding: 6px 9px;
+  margin-left: -45px;
+  border: none;
+  color: #6c6c6c;
+  transition: all 0.4s;
+  z-index: 10;
+}
+
+.search-btn:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  color: black;
+}
+
+.search-btn:focus {
+  outline: none;
+  color: black;
+}
