@@ -1,5 +1,7 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
+// import logout from "./Logout";
 
 function LogoComponent() {
   return (
@@ -15,22 +17,36 @@ const HeaderComponent = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // if (isLoggedIn) {
+  //   return <Logout />;
+  // }
+
+  
   return (
     <div className="navbar">
       <LogoComponent />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+
+          <li><Link to="/about">
+           About
+          </Link></li>
+          <Link to="/contact">
+            <li>Contact</li>
+          </Link>
           <li>Cart</li>
-          <li>Contact Us</li>
         </ul>
       </div>
+
       {isLoggedIn ? (
-        <button className='logout' onClick={() => setIsLoggedIn(false)}>Logout</button>
+        <button onClick={() => setIsLoggedIn(false)}>Logout</button>
       ) : (
-        <button className='login' onClick={() => setIsLoggedIn(true)}>Login</button>
+        <Link to="/login"><button>Login</button></Link>
       )}
+
     </div>
   );
 };

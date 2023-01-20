@@ -2,6 +2,8 @@ import { restaurantList } from "../../config";
 import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useState, useEffect } from "react";
 import ShimmerComponent from "./ShimmerComponent";
+import { Link } from "react-router-dom";
+
 
 function filterData(searchText, restaurants) {
   const filterData = restaurants.filter((restaurant) =>
@@ -80,10 +82,16 @@ const BodyComponent = () => {
             //   />
             // );
             return (
-              <RestaurantCardComponent
-                {...restaurant.data}
-                key={restaurant.data}
-              />
+              // <RestaurantCardComponent
+              //   {...restaurant.data}
+              //   key={restaurant.data}
+              // />
+              <Link
+              to={"/restaurant/" + restaurant.data.id}
+              key={restaurant.data.id}
+            >
+              <RestaurantCardComponent {...restaurant.data} />
+            </Link>
             );
           })}
         </div>

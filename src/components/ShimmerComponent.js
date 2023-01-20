@@ -6,7 +6,7 @@ const ShimmerComponent =()=>{
     {Array(10)
       .fill("")
       .map((e,index) => (
-        <div className='Card'>
+        <div key={index} className='Card'>
         <div className='CardImg skeleton'>
             
         </div>

@@ -23,17 +23,60 @@ import ReactDOM from "react-dom/client";
 import HeaderComponent from "./src/components/HeaderComponent";
 import BodyComponent from "./src/components/BodyComponent";
 import FooterComponent from "./src/components/FooterComponent";
+import { createBrowserRouter,Outlet,RouterProvider } from "react-router-dom";
+import ErrorComponent from "./src/components/ErrorComponent";
+import AboutComponent from "./src/components/AboutComponent";
+import Contact from "./src/components/Contact";
+import RestaurantMenu from "./src/components/RestaurantMenu";
+import Login from "./src/components/Login";
+
+
+
 
 
 const AppLayout = () => {
   return (
     <div className="app_root">
       <HeaderComponent />
-      <BodyComponent />
+      <Outlet/>
       <FooterComponent />
     </div>
   );
 };
+
+const appRouter = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <AppLayout />,
+      errorElement: <ErrorComponent />,
+      children: [
+        {
+          path: "/about",
+          element: <AboutComponent />,
+        },
+        {
+          path: "/",
+          element: <BodyComponent />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+        {
+          path: "/restaurant/:resId",
+          element: <RestaurantMenu />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        }
+      ],
+    },
+  ]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(header);
-root.render(<AppLayout />);
+// root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter} />);
+
