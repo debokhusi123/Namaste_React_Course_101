@@ -24,6 +24,7 @@ import HeaderComponent from "./src/components/HeaderComponent";
 import BodyComponent from "./src/components/BodyComponent";
 import FooterComponent from "./src/components/FooterComponent";
 
+
 const AppLayout = () => {
   return (
     <div className="app_root">

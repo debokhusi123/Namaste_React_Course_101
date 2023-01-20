@@ -1,3 +1,6 @@
+
+import { useState } from "react";
+
 function LogoComponent() {
   return (
     <img
@@ -9,6 +12,9 @@ function LogoComponent() {
 }
 
 const HeaderComponent = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="navbar">
       <LogoComponent />
@@ -20,6 +26,11 @@ const HeaderComponent = () => {
           <li>Contact Us</li>
         </ul>
       </div>
+      {isLoggedIn ? (
+        <button className='logout' onClick={() => setIsLoggedIn(false)}>Logout</button>
+      ) : (
+        <button className='login' onClick={() => setIsLoggedIn(true)}>Login</button>
+      )}
     </div>
   );
 };
