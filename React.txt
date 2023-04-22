@@ -573,3 +573,409 @@ Single Page Application (SPA) is a web application that dynamically updates the 
 In Server-side routing or rendering (SSR), every change in URL, http request is made to server to fetch the webpage, and replace the current webpage with the older one.
 
 In Client-side routing or rendering (CSR), during the first load, the webapp is loaded from server to client, after which whenever there is a change in URL, the router library navigates the user to the new page without sending any request to backend. All Single Page Applications uses client-side routing.
+
+Topics that are covered:
+Quick Test
+Nested routing
+Class Based Component
+extends
+props in CBC and FBC
+state variable in CBC and FBC
+Two states in CBC and FBC
+setState in CBC and FBC
+Multiple setState
+Why is React so popular?
+Sequence of excution in CBC for render and contructor
+componentDidMount()
+Function to call the API in CBC and FBC
+Execution sequence of render, constructor, componentDidMount() in CBC when there is a parent and a child
+Execution sequence of a parent with 2 children
+Component Life cycle
+Methods of component life cycle
+In componentDidMount(), I am calling API and after API call, I am simply doing console.log() then what would be the first execution? API call or console.log()?
+Execution sequence with componentDidUpdate()
+use of componentWillUnmount
+How would you write the below code in CBC for componentDidUpdate
+Things to be noted:
+References
+Quick Test
+Which tag do we use for routing?
+Link tag
+From where do we import the Link tag?
+react-router-dom
+What is Link using behind the scene
+just an anchor tag
+What hook do we use to read the url?
+useParams()
+What function did we use to confugure our routing?
+createBrowserRouter()
+What component that we use to provide the router to app?
+Router Provider
+Suppose we have children in the routing, where do these children get injected?
+Outlet component
+What element do we use to show the error in the routing?
+errorElement
+Nested Routing (Children of Children)
+If you want to render children inside children steps with example
+
+create profile component
+const Profile = () => {
+    return (
+        <div>
+            <h2>Profile rendered...</h2>
+       </div>
+   ) 
+}
+export default Profile;
+create children of children route
+const appRouter = createBrowserRouter([
+    {
+        path: "/",
+        element: <Layout />,
+        errorElement: <Error />,
+        children: [
+            {
+                path: "/about",
+                element: <About />,
+                children: [{
+                    path: "profile",
+                    element:<Profile/>
+                }]
+            },
+            
+        ],
+    }
+]);
+Pass outlet component for child component
+import { Outlet } from "react-router-dom";
+
+const About = () => {
+    return (
+        <div className="container">
+            <h1>About page is coming soon...</h1>
+            <Outlet />
+        </div>
+    )
+}
+export default About;
+Note :
+Never use /profile for children of children (nested route). slash means concate with root not the relative path. Instead of /profile, use profile.
+Outlet is replaced by child component. So, you can directly use child component instead of there
+Class based component (CBC)
+React initially started with class based component.
+These hooks have recently started coming in. Earlier, there was no concept of functional based component.
+It used to be very pity to write the code in CBC. It used to be very lengthy , messy, confusing for fellow developers, less maintainable.
+class based component is no longer in use.
+Note: If you are creating new project, please don't write CBC. Always prefer FBC.
+Purpose of learning CBC:
+Many companies can have older projects.
+You should know the CBC
+Highly asked in the interviews
+Know CBC but do not use.
+import React from "react";
+class Profile extends React.Component{
+    render() {
+        return(<h1>Profile class renders..</h1>)
+    }
+}
+export default Profile;
+Steps:
+import React from react.
+Create class that extends from React.Component.
+use render() that returns piece of JSX.
+export that class.
+You can import like below also: import {Component} from "react";
+extends
+It comes under the inheritance.
+When we want property and function from parent then we should use extend with the parent class name.
+Eg: class Profile extends React.Component{}
+
+props in CBC and FBC
+FBC: <Profile name="Rupa"/>
+const Profile = (props) => {
+   return (
+       <div>
+           <h2>Profile rendered...</h2>
+           {props.name}
+      </div>
+  ) 
+}
+export default Profile;
+CBC: <Profile name="Rupa"/>
+class Profile extends React.Component{
+    render() {
+        return (<div>
+            <h1>Profile class renders..</h1>
+            {this.props.name}
+        </div>)
+    }
+}
+export default Profile;
+When React tracks our component, it just takes the props and it will attaches to this keyword of the class instace
+props is an object and name is its properties.
+render nomencluture comes from render().
+render means return piece of jsx.
+state variable in CBC and FBC
+FBC:
+import {useState} from 'react';
+const Profile = () => {
+  const [count] = useState(0);
+   return (
+       <div>
+           <h2>Count:{count}</h2>
+      </div>
+  ) 
+}
+export default Profile;
+CBC:
+class Profile extends React.Component{
+   constructor(props){
+      super(props);
+      // create state
+      this.state{
+         count:0;
+      }
+   }
+    render() {
+        return (<div>
+            <h1>Profile class renders..</h1>
+            <h1>Count: {this.state.count}</h1>
+            {this.props.name}
+        </div>)
+    }
+}
+export default Profile;
+Need to write cconstructor with props parameter
+Under the constructor, we should use super(props).
+super() is mandatory
+use this.state, for creating state variables
+we can destructure also. const {count}=this.state
+Two states in CBC and FBC
+FBC:
+const [count1] = useState(0);
+const [count2] = useState(0);
+CBC
+constructor(props){
+      super(props);
+      // create state
+      this.state{
+         count1:0,
+         count2:0
+      }
+   }
+Never do like below
+constructor(props){
+      super(props);
+      // create state
+      this.state{
+         count1:0,
+      };
+      this.state{
+         count2:0
+      }
+   }
+React used one object to maintain states behind the scene. Don't do this.state{//code} multiple times
+setState in CBC and FBC
+FBC:
+ const [count,setCount] = useState(0);
+ return (<div>
+            <button onClick={()=>setCount(1)}>click</button>
+        </div>)
+    
+CBC (this.setState)
+ return (<div>
+            <button onClick={()=>{
+               this.setState({
+                  count:1
+               })
+            }}>click</button>
+        </div>)
+    
+use setState. Do not mutate directly.this.state.count=1---> Don't do it.
+Reconcilliation happens with setState, not with directly mutated object.
+Reconcilliation happens in the same way whether it's CBC or FBC.
+Multiple setState
+FBC: I know what is going to be set
+ const [count1,setCount1] = useState(0);
+ const [count2,setCount2] = useState(0);
+
+ return (<div>
+            <button onClick={()=>
+            setCount1(1);
+            setCount2(1);
+            }>click</button>
+        </div>)
+CBC (this.setState): I don't know what is going to be set
+ return (<div>
+            <button onClick={()=>{
+               this.setState({
+                  count1:1
+                  count2:1
+               })
+            }}>click</button>
+        </div>)
+Why is React so popular?
+Reconcilliation, Bundlers are not the only thing for popularily. React has constantly made developers happy.
+Sequence of excution in CBC for render and contructor
+constructor ----> render()
+componentDidMount()
+Component life cycle method.
+The componentDidMount() method allows us to execute the React code when the component is already placed in the DOM (Document Object Model).
+This method is called during the Mounting phase of the React Life-cycle i.e after the component is rendered.
+All the AJAX requests and the DOM or state updation should be coded in the componentDidMount() method block.
+We can also set up all the major subscriptions here but to avoid any performance issues, always remember to unsubscribe them in the componentWillUnmount() method.
+Function to call the API in CBC and FBC
+FBC
+
+useEffect
+Sequence : render ---> useEffect
+CBC
+
+componentDidMount
+sequence : constructor---> render component---> componentDidMount()
+componentDidMount(){//call the api}
+Execution sequence of render, constructor, componentDidMount() in CBC when there is a parent and a child
+parent constructor---> parent render---> child constructor---> child render---> child componentDidMount()---> parent componentDidMount
+Execution sequence of a parent with 2 children
+parent child 1 child 2
+
+parent constructor---> parent render-->child 1 constructor---> child 1 render--->child 2 constructor---> child 2 render-->child 1 componentDidMount() --> child 2 componentDidMount() --> parent componentDidMount
+Component Life cycle
+Alt text
+
+Rendering phases in 2 phases.
+render
+commit
+Render phase includes constructor and render()
+Commit phase is the place where actually react is modifying your dom.
+componentDidMount() is done after you have rendered the DOM (initial render)
+When we have 2 children, react batch up the render phase first.
+Render phase is faster than commit phase.
+Reason to complete render phase first : Because if it starts commit phase then it will delay the render phase for the other children.
+Render phase:
+parent child 1 child 2
+parent constructor---> parent render-->child 1 constructor---> child 1 render--->child 2 constructor---> child 2 render
+Now, react will update the dom
+Commit phase:
+child 1 componentDidMount() --> child 2 componentDidMount() --> parent componentDidMount
+methods of component life cycle:
+constructor()
+
+The constructor() method is called before anything else, when the component is initiated, and it is the natural place to set up the initial state and other initial values.
+
+The constructor() method is called with the props, as arguments, and you should always start by calling the super(props) before anything else, this will initiate the parent's constructor method and allows the component to inherit methods from its parent (React.Component).
+
+render():
+
+The render() method is required, and is the method that actually outputs the HTML to the DOM.
+The render() method is of course called when a component gets updated, it has to re-render the HTML to the DOM, with the new changes.
+componentDidMount():
+
+The componentDidMount() method is called after the component is rendered.
+componentDidUpdate():
+
+The componentDidUpdate method is called after the component is updated in the DOM.
+componentWillUnmount():
+
+The componentWillUnmount method is called when the component is about to be removed from the DOM. There are few more function.Please refer this link for more info:Life cycle
+In componentDidMount(), I am calling API and after API call, I am simply doing console.log() then what would be the first execution? API call or console.log()?
+Console.log() would be the first execution then API call would be made because of async function. Whenever we make api call in componentDidMount() then we have to mark that function as asynchronous.
+Execution sequence with componentDidUpdate()
+constructor --> render --> componentDidMount() --> API call --> set state --> --> render--> componentDidUpdate
+use of componentWillUnmount
+The componentWillUnmount() method allows us to execute the React code when the component gets destroyed or unmounted from the DOM (Document Object Model).
+This method is called during the Unmounting phase of the React Life-cycle i.e before the component gets unmounted.
+All the cleanups such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in componentDidMount() should be coded in the componentWillUnmount() method block.
+Tip: Never call setState() in componentWillUnmount() method.
+Eg:
+componentDidMount(){
+  setInterval(()=>{
+    console.log("hello")
+  },1000);
+}
+It will call componentDidMount() every second.
+cons:
+If you will leave the page, it will still gets called.
+This is the problem of SPA.
+Because it's not reloading of refreshing.
+Performance loss.
+Needs to be cleaned with the help of componentWillUnmount()
+How to clean :
+Assign the funtion to the variable.
+componentDidMount(){
+  this.timer=setInterval(()=>{
+    console.log("hello")
+  },1000);
+}
+use componentWillUnmount().
+componentWillUnmount(){
+  clearInterval(this.timer);
+}
+How would you write the below code in CBC for componentDidUpdate
+useEffect(()=>{
+
+},[count])
+componentDidUpdate(prevProps, prevState){
+    if(this.state.count!== prevState.count){
+
+    }
+}
+if there is 2 useEffect() then in CBC we need to write 2 if else.
+
+Things to be noted:
+Never ever compare react's life cycle to functional component.
+useEffect() is not equivalent to componentDidMount.
+useEffect() is not using componentDidMount behind the scene
+References:
+React Life Cycle Method Diagram
+createHashRouter
+createMemoryRouter
+Code Link
+async useEffect
+
+
+Theory Assignment: Chapter - 08 Let's get Classy (21/01/2023)
+1. How do you create Nested Routes react-router-dom cofiguration
+2. Read abt createHashRouter, createMemoryRouter from React Router docs.
+3. What is the order of life cycle method calls in Class Based Components
+Class based components are executed in two phases : Render phase & commit phase.
+
+Render phase is pure and no side effects. It may be paused, restarted or aborted by React (when child component is created for eg). The constructor(), render() and componentDidMount() happens in this phase.
+
+In constructor, the props are passed to its parents.
+
+These methods are called in the following order when an instance of a component is being created and inserted into the DOM:
+
+Mounting :
+
+constructor - The constructor for a React component is called before it is mounted. When implementing the constructor for a React.Component subclass, you should call super(props) before any other statement. Otherwise, this.props will be undefined in the constructor, which can lead to bugs.
+Initializing local state by assigning an object to this.state
+Binding event handler methods to an instance.
+Constructor is the only place where you should assign this.state directly. In all other methods, you need to use this.setState() instead.
+
+componentDidMount() - componentDidMount() is invoked immediately after a component is mounted (inserted into the tree). You may call setState() immediately in componentDidMount() so that it triggers re-render before the browser updates the screen.
+Updating : 3. componentDidUpdate() - componentDidUpdate() is invoked immediately after updating occurs. This method is not called for the initial render.
+
+Unmounting : 4. componentWillUnmount() -componentWillUnmount() is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in componentDidMount().
+
+4. Why do we use componentDidMount?
+If you need to load data from a remote endpoint, this is a good place to instantiate the network request. This method is a good place to set up any subscriptions. You may call setState() immediately in componentDidMount(). It will trigger an extra rendering, but it will happen before the browser updates the screen.
+
+5. Why do we use componentWillUnmount? Show with example
+componentWillUnmount is used to cleanup any function/subscriptions that will be running even after the component is unmounted.
+
+For example, in Repo class, during componentDidMount() a timer is set with an interval of every one second to print in console. When the component is unmounted (users moves to a different page), the timer will be running in the background, which we might not even realise and causing huge performance issue. To avoid such situations the cleanup function can be done in componentWillUnmount, in this example clearInterval(timer) to clear the timer interval before unmounting Repo component.
+
+6. (Research) Why do we use super(props) in constructor?
+super() is used inside constructor of a class to derive the parent's all properties inside the class that extended it. If super() is not used, then Reference Error : Must call super constructor in derived classes before accessing 'this' or returning from derived constructor is thrown in the console.
+
+A component that extends React.Component must call the super() constructor in the derived class since it’s required to access this context inside the derived class constructor.
+
+When you try to use props passed on parent to child component in child component using this.props.name, it will still work without super(props). Only super() is also enought for accessing props in render method.
+
+The main difference between super() and super(props) is the this.props is undefined in child's constructor in super() but this.props contains the passed props if super(props) is used.
+
+7. (Research) Why can't we have the callback function of useEffect async?
+useEffect expects it's callback function to return nothing or return a function (cleanup function that is called when the component is unmounted). If we make the callback function as async, it will return a promise which is not expected.
+
+Solution to this is not making the callback function async but created another async function inside callback function of useEffect()

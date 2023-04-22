@@ -1,4 +1,4 @@
-import { IMG_URL } from "../../config";
+import { IMG_URL } from "./config";
 
 const RestaurantCardComponent = ({name, cloudinaryImageId, cuisines, avgRating, deliveryTime, costForTwoString, aggregatedDiscountInfo}) => {
   return(

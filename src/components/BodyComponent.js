@@ -1,4 +1,4 @@
-import { restaurantList } from "../../config";
+import { restaurantList } from "./config";
 import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useState, useEffect } from "react";
 import ShimmerComponent from "./ShimmerComponent";
